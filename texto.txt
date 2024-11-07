@@ -1,0 +1,15 @@
+HOla
+politica_1
+policies
+masking
+set columna_1
+"masking"
+"politica"
+SET env = 'DEV'
+SET db = 'DB_ES_DEV'
+SET table_to_mask = $db || '.STAGING.STG_ES_RAW_CLIENTESDCE';
+SET masking_policy = 'MP_CUD_CONS_TEXT_C1_SUBS' || $env;
+CALL DATA_OCEAN_LOG.UTILS.SP_SET_MASKING_POLICY_ON_COLUMN ( $masking_policy, $table_to_mask,['DOC_DE_IDENTIDAD','NOMBRE','SEXO','NUMERO_DE_CALLE']);
+
+SET masking_policy = 'MP_CUD_CONS_DATETIME_C1_SUBS' || $env;
+CALL DATA_OCEAN_LOG.UTILS.SP_SET_MASKING_POLICY_ON_COLUMN ( $masking_policy, $table_to_mask,['FECHA_NACIMIENTO']);
